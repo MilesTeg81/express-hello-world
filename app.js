@@ -4,8 +4,18 @@ const port = process.env.PORT || 3001;
 
 //app.get("/", (req, res) => res.type('html').send(html));
 
-app.get('/', (req, res) => res.send('Hello World!'));
-const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+app.get('/', function(req, res){ 
+  res.send('Hello World!');
+  console.log('Hello World! sent!');
+                               });
+//const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+// App listening on the below port
+const server = app.listen(port, function(err){
+   if (err) console.log(err);
+   console.log("Server listening on PORT", port);
+});
+
 
 server.keepAliveTimeout = 120 * 1000;
 server.headersTimeout = 120 * 1000;
