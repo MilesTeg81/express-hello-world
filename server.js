@@ -283,10 +283,7 @@ wss.on("connection", (ws) => {
 
 let intervalCount = 0;
 let intervalAlone = 0;
-const interval = setInterval( pinger(), PING_INTERVAL);  // eslint-disable-line no-unused-vars
-
-function pinger()
-{
+const interval = setIntervall(() => { // eslint-disable-line no-unused-vars
 	let tmpstring = "";
 	intervalCount++;
 	if (intervalCount == 1) {
@@ -304,4 +301,4 @@ function pinger()
 		tmpstring = `, no peers found.`;
 	}
 	console.log(`${intervalCount}   Listening on Port ${PORT}${tmpstring}`);
-}
+}, PING_INTERVAL);
