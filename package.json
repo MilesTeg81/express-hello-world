@@ -8,10 +8,14 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-	"teststart": "eslint server.js && echo \"Lint OK\" && node server.js",
-    "start": "node server.js",
+    "start": "eslint server.js && echo \"Lint OK\" && node server.js",
     "test": "eslint server.js && echo \"Lint OK\" && exit 0",
 	"starthello": "node app.js"
+  },
+  "scriptsComments": {
+	"info": "just testing",
+	"teststart": "eslint server.js && echo \"Lint OK\" && node server.js",
+    "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.18.2",
