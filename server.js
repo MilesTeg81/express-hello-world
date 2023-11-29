@@ -1,21 +1,22 @@
-/* GENERAL WARNING: */
+// GENERAL WARNING: 
 
 /*
- * If you use Render.com FREE tier, 
- * sockets will selfterminate connections after 5 min!
- * This shouldn't be an issue for this script 
- * as it's only used for testing simple lobbies & matchmaking.
- * I'm not so sure about HTML5-ports though...
+ * Using Render.com FREE tier:
+ *  Sockets will selfterminate connections after 5 min!
+ *  This shouldn't be an issue for this script
+ *  Bc it's only used for testing simple lobbies & matchmaking.
+ *  I'm not so sure about HTML5-ports though...
 */
 
-// < from render.com express helloworld */
-// const express = require("express");
-// const app = express(); */
+//< from render.com express helloworld */
+//const express = require("express");
+//const app = express(); */
 
 /*app.get('/', function(req, res){ 
-  res.send('Hello World!');
-  console.log('Hello World! sent!');
-                               });*/
+ * res.send('Hello World!');
+ * console.log('Hello World! sent!');
+                               });
+*/
 
 // //const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
