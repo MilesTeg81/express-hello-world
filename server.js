@@ -1,9 +1,36 @@
+// < from render.com express helloworld
+/* const express = require("express");
+ const app = express();
+*/
+
+/*
+app.get('/', function(req, res){ 
+  res.send('Hello World!');
+  console.log('Hello World! sent!');
+                               });
+*/
+
+// //const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
+
+// App listening on the below port
+
+/*
+const server = app.listen(port, function(err){
+   if (err) console.log(err);
+   console.log("Server listening on PORT", port);
+});
+server.keepAliveTimeout = 120 * 1000;
+server.headersTimeout = 120 * 1000;
+*/
+
+//   from render.com express helloworld  >
+
 const WebSocket = require("ws");
 const crypto = require("crypto");
 
-const MAX_PEERS = 4096;
-const MAX_LOBBIES = 1024;
-const PORT = 9080;
+const MAX_PEERS = 256;
+const MAX_LOBBIES = 64;
+const PORT = process.env.PORT || 10000;
 const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 const NO_LOBBY_TIMEOUT = 1000;
@@ -70,6 +97,7 @@ class Lobby {
 		this.peers = [];
 		this.sealed = false;
 		this.closeTimer = -1;
+		console.log(`New Lobby:  Name: ${this.name}, host: ${this.host} \n`);
 	}
 	getPeerId (peer) {
 		if (this.host === peer.id) return 1;
@@ -78,6 +106,7 @@ class Lobby {
 	join (peer) {
 		const assigned = this.getPeerId(peer);
 		peer.ws.send(`I: ${assigned}\n`);
+		console.log(`I: ${assigned}\n`);
 		this.peers.forEach((p) => {
 			p.ws.send(`N: ${assigned}\n`);
 			peer.ws.send(`N: ${this.getPeerId(p)}\n`);
