@@ -178,12 +178,11 @@ function joinLobby (peer, pLobby) {
 		console.log(`Open lobbies: ${lobbies.size}`);
 	}
 	else {
-		console.log("l1");
 		if ((lobbyName != "") && (peer.lobby == "" )) {
-			console.log("l2");
 			if ( !lobbies.has(lobbyName) ) {
-				console.log("l3");
 				console.log(` Unknown Lobbyname ${lobbyName} supplied!`);
+				lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
+				console.log(`Peer ("Host") ${peer.id} created lobby ${lobbyName}`);
 			}
 		}
 	}
@@ -210,6 +209,9 @@ function parseMsg (peer, msg) {
 	// Lobby joining.
 	if (cmd.startsWith("J: ")) {
 		console.log(cmd);
+		console.log(`substr2 ${cmd.substr(2)}`);
+		console.log(`substr3 ${cmd.substr(3)}`);
+		
 		joinLobby(peer, cmd.substr(3).trim());
 		return;
 	}
