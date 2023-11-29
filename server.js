@@ -283,7 +283,8 @@ wss.on("connection", (ws) => {
 
 let intervalCount = 0;
 let intervalAlone = 0;
-const interval = setIntervall(() => { // eslint-disable-line no-unused-vars
+
+const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	let tmpstring = "";
 	intervalCount++;
 	if (intervalCount == 1) {
