@@ -97,7 +97,7 @@ class Lobby {
 		this.peers = [];
 		this.sealed = false;
 		this.closeTimer = -1;
-		console.log(`New Lobby:  Name: ${this.name}, host: ${this.host} \n`);
+		console.log(`New Lobby:  Name: ${this.name}, host: ${this.host}`);
 	}
 	getPeerId (peer) {
 		if (this.host === peer.id) return 1;
@@ -278,4 +278,5 @@ const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	wss.clients.forEach((ws) => {
 		ws.ping();
 	});
+	console.log("Interval");
 }, PING_INTERVAL);
