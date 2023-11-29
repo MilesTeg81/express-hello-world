@@ -302,7 +302,7 @@ const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 		tmpstring = `, no peers found.`;
 	}
 	console.log(`${intervalCount}   Listening on Port ${PORT}${tmpstring}`);
-	if (intervalAlone == 10) {
-		clearInterval(interval);
-	}
+	// if (intervalAlone == 10) {
+	//	 clearInterval(interval);
+	// }
 }, PING_INTERVAL);
