@@ -8,7 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "eslint server.js && echo \"Lint OK\" && node server.js",
+    "start": "node server.js",
     "test": "eslint server.js && echo \"Lint OK\" && exit 0",
 	"starthello": "node app.js"
   },

@@ -162,6 +162,7 @@ class Lobby {
 const lobbies = new Map();
 let peersCount = 0;
 let tmpstring = "";
+
 function joinLobby (peer, pLobby) {
 	let lobbyName = pLobby;
 	if (lobbyName === "") {
@@ -285,7 +286,7 @@ const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	wss.clients.forEach( (ws) => {
 		ws.ping();
 	} );
-	if (peersCount>0) {
+	if (peersCount > 0) {
 		tmpstring = `, pinging peers ${peersCount}.`;
 	}
 	console.log(`listening on Port ${PORT}${tmpstring}`);
