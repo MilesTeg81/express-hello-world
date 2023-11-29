@@ -161,7 +161,6 @@ class Lobby {
 
 const lobbies = new Map();
 let peersCount = 0;
-let tmpstring = "";
 
 function joinLobby (peer, pLobby) {
 	let lobbyName = pLobby;
@@ -282,12 +281,22 @@ wss.on("connection", (ws) => {
 	});
 });
 
+let intervalCount = 0;
+
 const interval = setInterval(() => { // eslint-disable-line no-unused-vars
+	let tmpstring = "";
+	intervalCount++;
+	if (intervalCount == 0) {
+		console.log(`node js starts listening for peers on Port ${PORT}...`);
+	}
+		
 	wss.clients.forEach( (ws) => {
 		ws.ping();
 	} );
 	if (peersCount > 0) {
-		tmpstring = `, pinging peers ${peersCount}.`;
+		tmpstring = `, pinging ${peersCount} peers.`;
+	} else {
+		tmpstring = `, no peers found.`;
 	}
-	console.log(`listening on Port ${PORT}${tmpstring}`);
+	console.log(`${intervalCount}listening on Port ${PORT}${tmpstring}`);
 }, PING_INTERVAL);
