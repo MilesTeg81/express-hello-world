@@ -178,10 +178,13 @@ function joinLobby (peer, pLobby) {
 		console.log(`Open lobbies: ${lobbies.size}`);
 	}
 	else {
+		console.log("l1");
 		if ((lobbyName != "") && (peer.lobby == "" )) {
-		if ( !lobbies.has(lobbyName) ) {
-			console.log(` Unknown Lobbyname ${lobbyName} supplied!`);
-		}
+			console.log("l2");
+			if ( !lobbies.has(lobbyName) ) {
+				console.log("l3");
+				console.log(` Unknown Lobbyname ${lobbyName} supplied!`);
+			}
 		}
 	}
 	
