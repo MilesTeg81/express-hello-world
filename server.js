@@ -183,6 +183,7 @@ function joinLobby (peer, pLobby) {
 				console.log(` Unknown Lobbyname ${lobbyName} supplied!`);
 				lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
 				console.log(`Peer ("Host") ${peer.id} created lobby ${lobbyName}`);
+				console.log(`Open lobbies: ${lobbies.size}`);
 			}
 		}
 	}
@@ -194,7 +195,11 @@ function joinLobby (peer, pLobby) {
 	console.log(`Peer ${peer.id} joining lobby ${lobbyName} ` +
 		`with ${lobby.peers.length} peers`);
 	lobby.join(peer);
+	lobby.peers.forEach( (member) => {
+		console.log(`member ${member}\n`);
+	});
 	peer.ws.send(`J: ${lobbyName}\n`);
+	
 }
 
 function parseMsg (peer, msg) {
