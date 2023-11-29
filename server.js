@@ -286,8 +286,8 @@ let intervalCount = 0;
 const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	let tmpstring = "";
 	intervalCount++;
-	if (intervalCount == 0) {
-		console.log(`node js starts listening for peers on Port ${PORT}...`);
+	if (intervalCount == 1) {
+		console.log(`Node js waiting for peers to connect on Port ${PORT}...`);
 	}
 		
 	wss.clients.forEach( (ws) => {
@@ -298,5 +298,5 @@ const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	} else {
 		tmpstring = `, no peers found.`;
 	}
-	console.log(`${intervalCount}listening on Port ${PORT}${tmpstring}`);
+	console.log(`${intervalCount}   Listening on Port ${PORT}${tmpstring}`);
 }, PING_INTERVAL);
