@@ -281,9 +281,10 @@ wss.on("connection", (ws) => {
 });
 
 const interval = setInterval(() => { // eslint-disable-line no-unused-vars
+	tmpstring =""
 	wss.clients.forEach((ws) => {
 		ws.ping();
-		console.log(`Pinging ${ws.toString}`);
+		tmpstring = " and pinging peers.";
 	});
-	console.log(`listening on Port ${PORT}`);
+	console.log(`listening on Port ${PORT} ${tmpstring}`);
 }, PING_INTERVAL);
