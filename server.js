@@ -209,6 +209,7 @@ function parseMsg (peer, msg) {
 
 	// Lobby joining.
 	if (cmd.startsWith("J: ")) {
+		console.log(cmd);
 		joinLobby(peer, cmd.substr(3).trim());
 		return;
 	}
