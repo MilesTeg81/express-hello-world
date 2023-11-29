@@ -21,6 +21,4 @@
   "engines": {
     "node": ">=18.18.0"
   }
-  "author": "Fabio Alessandrelli",
-  "license": "MIT"
 }
