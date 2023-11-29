@@ -8,11 +8,11 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
     "test": "eslint server.js && echo \"Lint OK\" && exit 0"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "express": "^4.18.2",
     "ws": "^7.0.0"
   },
   "devDependencies": {
