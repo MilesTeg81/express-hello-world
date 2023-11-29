@@ -1,3 +1,9 @@
+/* GENERAL WARNING:
+ If you use Render.com FREE tier, sockets will selfterminate connections after 5 min!
+ This shouldn't be an issue for this script as it's only used for testing simple lobbies & matchmaking.
+ I'm not so sure about HTML5-ports though...
+*/
+
 // < from render.com express helloworld
 /* const express = require("express");
  const app = express();
@@ -97,7 +103,7 @@ class Lobby {
 		this.peers = [];
 		this.sealed = false;
 		this.closeTimer = -1;
-		console.log(`New Lobby:  Name: ${this.name}, host: ${this.host}`);
+		console.log(`Peer ${this.host} tries to create lobby ${this.name}`);
 	}
 	getPeerId (peer) {
 		if (this.host === peer.id) return 1;
@@ -167,7 +173,7 @@ function joinLobby (peer, pLobby) {
 		}
 		lobbyName = randomSecret();
 		lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
-		console.log(`Peer ${peer.id} created lobby ${lobbyName}`);
+		console.log(`Peer (\"Host\") ${peer.id} created lobby ${lobbyName}`);
 		console.log(`Open lobbies: ${lobbies.size}`);
 	}
 	const lobby = lobbies.get(lobbyName);
@@ -277,6 +283,7 @@ wss.on("connection", (ws) => {
 const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	wss.clients.forEach((ws) => {
 		ws.ping();
+		console.log(`Pinging ${ws.toString}`);
 	});
-	console.log("Interval");
+	console.log(`listening on Port ${PORT}`);
 }, PING_INTERVAL);
