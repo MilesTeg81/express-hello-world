@@ -239,6 +239,7 @@ function parseMsg (peer, msg) {
 }
 
 wss.on("connection", (ws) => {
+	setInterval()
 	if (peersCount >= MAX_PEERS) {
 		ws.close(4000, STR_TOO_MANY_PEERS);
 		return;
@@ -282,7 +283,7 @@ wss.on("connection", (ws) => {
 });
 
 let intervalCount = 0;
-
+let intervalAlone = 0;
 const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	let tmpstring = "";
 	intervalCount++;
@@ -294,9 +295,14 @@ const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 		ws.ping();
 	} );
 	if (peersCount > 0) {
+		intervalAlone = 0;
 		tmpstring = `, pinging ${peersCount} peers.`;
 	} else {
+		intervalAlone++;
 		tmpstring = `, no peers found.`;
 	}
 	console.log(`${intervalCount}   Listening on Port ${PORT}${tmpstring}`);
+	if (intervalAlone == 10) {
+		clearInterval(interval);
+	}
 }, PING_INTERVAL);
