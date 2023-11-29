@@ -1,4 +1,4 @@
-// GENERAL WARNING: 
+// GENERAL WARNING:
 
 /*
  * Using Render.com FREE tier:
@@ -8,26 +8,27 @@
  *  I'm not so sure about HTML5-ports though...
 */
 
-//< from render.com express helloworld */
-//const express = require("express");
-//const app = express(); */
+// < from render.com express helloworld */
+// const express = require("express");
+// const app = express(); */
 
-/*app.get('/', function(req, res){ 
- * res.send('Hello World!');
- * console.log('Hello World! sent!');
-                               });
+/*
+ * app.get('/', function(req, res){
+ *   res.send('Hello World!');
+ *   console.log('Hello World! sent!');
+ * });
 */
 
 // //const server = app.listen(port, () => console.log(`Example app listening on port ${port}!`));
 
 // App listening on the below port
 
-/*const server = app.listen(port, function(err){
-   if (err) console.log(err);
-   console.log("Server listening on PORT", port);
-});
-server.keepAliveTimeout = 120 * 1000;
-server.headersTimeout = 120 * 1000;*/
+/* const server = app.listen(port, function(err){
+ *    if (err) console.log(err);
+ *    console.log("Server listening on PORT", port);
+ *  });
+ * server.keepAliveTimeout = 120 * 1000;
+ * server.headersTimeout = 120 * 1000; */
 
 //   from render.com express helloworld  >
 
@@ -36,7 +37,7 @@ const crypto = require("crypto");
 
 const MAX_PEERS = 256;
 const MAX_LOBBIES = 64;
-const PORT = process.env.PORT || 10000;
+const PORT = process.env.PORT || 10000; // eslint-disable-line no-undef no-process-env
 const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 const NO_LOBBY_TIMEOUT = 1000;
@@ -160,7 +161,7 @@ class Lobby {
 
 const lobbies = new Map();
 let peersCount = 0;
-
+let tmpstring = "";
 function joinLobby (peer, pLobby) {
 	let lobbyName = pLobby;
 	if (lobbyName === "") {
@@ -173,7 +174,7 @@ function joinLobby (peer, pLobby) {
 		}
 		lobbyName = randomSecret();
 		lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
-		console.log(`Peer (\"Host\") ${peer.id} created lobby ${lobbyName}`);
+		console.log(`Peer ("Host") ${peer.id} created lobby ${lobbyName}`);
 		console.log(`Open lobbies: ${lobbies.size}`);
 	}
 	const lobby = lobbies.get(lobbyName);
@@ -281,14 +282,11 @@ wss.on("connection", (ws) => {
 });
 
 const interval = setInterval(() => { // eslint-disable-line no-unused-vars
-	tmpstring ="";
-	countclients=0;
 	wss.clients.forEach( (ws) => {
 		ws.ping();
-		countclients++;
 	} );
-	if (counter>0) {
-		tmpstring = `, pinging peers ${countclients}.`;
+	if (peersCount>0) {
+		tmpstring = `, pinging peers ${peersCount}.`;
 	}
 	console.log(`listening on Port ${PORT}${tmpstring}`);
 }, PING_INTERVAL);
