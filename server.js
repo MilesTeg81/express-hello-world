@@ -189,7 +189,7 @@ function joinLobby (peer, pLobby) {
 *	}
 	*/
 	const lobby = lobbies.get(lobbyName);
-	if (!lobby) throw new ProtoError(4000, STR_LOBBY_DOES_NOT_EXISTS);
+	if (!lobby) throw new ProtoError(4000, (lobbyName+STR_LOBBY_DOES_NOT_EXISTS));
 	if (lobby.sealed) throw new ProtoError(4000, STR_LOBBY_IS_SEALED);
 	peer.lobby = lobbyName;
 	console.log(`Peer ${peer.id} joining lobby ${lobbyName} ` +
