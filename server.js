@@ -177,17 +177,17 @@ function joinLobby (peer, pLobby) {
 		console.log(`Peer ("Host") ${peer.id} created lobby ${lobbyName}`);
 		console.log(`Open lobbies: ${lobbies.size}`);
 	}
-	else {
-		if ((lobbyName != "") && (peer.lobby == "" )) {
-			if ( !lobbies.has(lobbyName) ) {
-				console.log(` Unknown Lobbyname ${lobbyName} supplied!`);
-				lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
-				console.log(`Peer ("Host") ${peer.id} created lobby ${lobbyName}`);
-				console.log(`Open lobbies: ${lobbies.size}`);
-			}
-		}
-	}
-	
+	/*
+*	else {
+*		if ((lobbyName != "") && (peer.lobby == "" )) {
+*			if ( !lobbies.has(lobbyName) ) {
+*				lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
+*				console.log(`Peer ("Host") ${peer.id} created lobby ${lobbyName}`);
+*				console.log(`Open lobbies: ${lobbies.size}`);
+*			}
+*		}
+*	}
+	*/
 	const lobby = lobbies.get(lobbyName);
 	if (!lobby) throw new ProtoError(4000, STR_LOBBY_DOES_NOT_EXISTS);
 	if (lobby.sealed) throw new ProtoError(4000, STR_LOBBY_IS_SEALED);
@@ -196,7 +196,7 @@ function joinLobby (peer, pLobby) {
 		`with ${lobby.peers.length} peers`);
 	lobby.join(peer);
 	lobby.peers.forEach( (member) => {
-		console.log(`member ${member}\n`);
+		console.log(`member ${member}  joined lobby ${lobbyName}\n`);
 	});
 	peer.ws.send(`J: ${lobbyName}\n`);
 	

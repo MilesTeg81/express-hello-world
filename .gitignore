@@ -5,3 +5,5 @@ package-lock.json
 *.lock
 *.lock
 *.lock
+*.bak
+*.lock
