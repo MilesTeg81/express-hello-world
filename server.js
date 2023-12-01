@@ -172,7 +172,7 @@ function joinLobby (peer, pLobby) {
 		if (peer.lobby !== "") {
 			throw new ProtoError(4000, STR_ALREADY_IN_LOBBY);
 		}
-		lobbyName = randomSecret();
+		lobbyName = "12345"		//randomSecret();
 		lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
 		console.log(`Peer ("Host") ${peer.id} created lobby ${lobbyName}`);
 		console.log(`Open lobbies: ${lobbies.size}`);
