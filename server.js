@@ -196,7 +196,7 @@ function joinLobby (peer, pLobby) {
 		`with ${lobby.peers.length} peers`);
 	lobby.join(peer);
 	lobby.peers.forEach( (member) => {
-		console.log(`member ${member}  joined lobby ${lobbyName}\n`);
+		console.log(`member ${member.id}  is in lobby ${lobbyName}\n`);
 	});
 	peer.ws.send(`J: ${lobbyName}\n`);
 	
@@ -257,7 +257,7 @@ function parseMsg (peer, msg) {
 	throw new ProtoError(4000, STR_INVALID_CMD);
 }
 
-wss.on("connection", (ws) => {
+wss.on("connection", (ws, request, client) => {
 	if (peersCount >= MAX_PEERS) {
 		ws.close(4000, STR_TOO_MANY_PEERS);
 		return;
@@ -265,6 +265,7 @@ wss.on("connection", (ws) => {
 	peersCount++;
 	const id = randomId();
 	const peer = new Peer(id, ws);
+	console.log(`new Peer:  ${id}\n`);
 	ws.on("message", (message) => {
 		if (typeof message !== "string") {
 			ws.close(4000, STR_INVALID_TRANSFER_MODE);
@@ -272,6 +273,7 @@ wss.on("connection", (ws) => {
 		}
 		try {
 			parseMsg(peer, message);
+			console.log(`Received message ${message} from user ${client}`);
 		} catch (e) {
 			const code = e.code || 4000;
 			console.log(`Error parsing message from ${id}:\n` +
