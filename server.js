@@ -273,7 +273,7 @@ wss.on("connection", (ws, request, client) => {
 		}
 		try {
 			parseMsg(peer, message);
-			console.log(`Received message ${message} from user ${client}`);
+			console.log(`Received message ${message} from user ${client} --id ${id}, peerid ${peer.id}`);
 		} catch (e) {
 			const code = e.code || 4000;
 			console.log(`Error parsing message from ${id}:\n` +
