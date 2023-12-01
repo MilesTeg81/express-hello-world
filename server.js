@@ -113,10 +113,10 @@ class Lobby {
 	join (peer) {
 		const assigned = this.getPeerId(peer);
 		peer.ws.send(`I: ${assigned}\n`);
-		console.log(`I: ${assigned}\n`);
+		console.log(`I:PeerId: ${assigned}\n`);
 		this.peers.forEach((p) => {
-			p.ws.send(`N: ${assigned}\n`);
-			peer.ws.send(`N: ${this.getPeerId(p)}\n`);
+			p.ws.send(`N: ${assigned}\n`); // send id of the new one to old peers
+			peer.ws.send(`N: ${this.getPeerId(p)}\n`); // send id of all old peers to new one
 		});
 		this.peers.push(peer);
 	}
@@ -309,7 +309,7 @@ const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	if (intervalCount == 1) {
 		console.log(`Node js waiting for peers to connect on Port ${PORT}...`);
 	}
-		
+
 	wss.clients.forEach( (ws) => {
 		ws.ping();
 	} );

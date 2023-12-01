@@ -10,11 +10,11 @@
   "scripts": {
     "start": "node server.js",
     "test": "eslint server.js && echo \"Lint OK\" && exit 0",
-	"starthello": "node app.js"
+    "starthello": "node app.js"
   },
   "scriptsComments": {
-	"info": "just testing",
-	"teststart": "eslint server.js && echo \"Lint OK\" && node server.js",
+    "info": "just testing",
+    "teststart": "eslint server.js && echo \"Lint OK\" && node server.js",
     "start": "node server.js"
   },
   "dependencies": {
