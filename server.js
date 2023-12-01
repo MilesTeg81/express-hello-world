@@ -70,7 +70,7 @@ function randomId () {
 
 function randomSecret () {
 	let out = "";
-	for (let i = 0; i < 16; i++) {
+	for (let i = 0; i < 5; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
 	return out;
