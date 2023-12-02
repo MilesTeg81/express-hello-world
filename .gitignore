@@ -7,3 +7,4 @@ package-lock.json
 *.lock
 *.bak
 *.lock
+yarn.lock
