@@ -42,7 +42,7 @@ const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 const NO_LOBBY_TIMEOUT = 1000;
 const SEAL_CLOSE_TIMEOUT = 10000;
-const PING_INTERVAL = 10000;
+const PING_INTERVAL = 5000;
 
 const STR_NO_LOBBY = "Have not joined lobby yet";
 const STR_HOST_DISCONNECTED = "Room host has disconnected";
@@ -117,6 +117,7 @@ class Lobby {
 		this.peers.forEach((p) => {
 			p.ws.send(`N: ${assigned}\n`); // send id of the new one to old peers
 			peer.ws.send(`N: ${this.getPeerId(p)}\n`); // send id of all old peers to new one
+			console.log(`to old peers: N: ${assigned};  to new peer: N: ${this.getPeerId(p)}`); 
 		});
 		this.peers.push(peer);
 	}
@@ -219,10 +220,7 @@ function parseMsg (peer, msg) {
 
 	// Lobby joining.
 	if (cmd.startsWith("J: ")) {
-		console.log(cmd);
-		console.log(`substr2 ${cmd.substr(2)}`);
-		console.log(`substr3 ${cmd.substr(3)}`);
-		
+		console.log(cmd);		
 		joinLobby(peer, cmd.substr(3).trim());
 		return;
 	}
