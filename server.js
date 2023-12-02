@@ -48,7 +48,34 @@ const crypto = require("crypto");
 const MAX_PEERS = 256;
 const MAX_LOBBIES = 64;
 const PORT = process.env.PORT || 10000; // eslint-disable-line no-undef no-process-env
-const process.env.PORT = 10000;
+
+/* infos about port settings
+*
+*  Unix [1]:
+*
+* $ PORT=1234 node app.js
+*
+*  More permanently (for a login session) [2]:
+* $ export PORT=1234
+* $ node app.js
+*
+*    In Windows:
+*
+* set PORT=1234
+*
+*    In Windows PowerShell:
+*
+* $env:PORT = 1234
+* [1] Process-lived, while the parent process that initiates is still running. If you close terminal, variable dies.
+* [2] Close terminal, open a new one, variable still alive.
+*
+* from https://stackoverflow.com/questions/42656326/how-to-set-port-for-express-server-dynamically
+*
+* For Render: TODO ....
+* in web interface, set Env. Variable: PORT - 1234
+* ...
+*/
+
 const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 const NO_LOBBY_TIMEOUT = 1000;
