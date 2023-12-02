@@ -8,3 +8,4 @@ package-lock.json
 *.bak
 *.lock
 yarn.lock
+*.lnk
