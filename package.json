@@ -18,9 +18,6 @@
     "engines: node": ">=18.18.0",
     "starthello": "node app.js"
   },
-  "engines": {
-	  "node": ">=18.18.0"
-  },
   "dependencies": {
     "ws": "^7.0.0"
   },
