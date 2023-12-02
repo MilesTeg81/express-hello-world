@@ -48,6 +48,7 @@ const crypto = require("crypto");
 const MAX_PEERS = 256;
 const MAX_LOBBIES = 64;
 const PORT = process.env.PORT || 10000; // eslint-disable-line no-undef no-process-env
+const process.env.PORT = 10000;
 const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 const NO_LOBBY_TIMEOUT = 1000;
