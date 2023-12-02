@@ -15,10 +15,10 @@
   "scriptsComments": {
     "info": "just testing",
     "teststart": "eslint server.js && echo \"Lint OK\" && node server.js",
+    "express": "^4.18.2",
     "start": "node server.js"
   },
   "dependencies": {
-    "express": "^4.18.2",
     "ws": "^7.0.0"
   },
   "devDependencies": {

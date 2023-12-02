@@ -42,7 +42,7 @@ const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
 const NO_LOBBY_TIMEOUT = 1000;
 const SEAL_CLOSE_TIMEOUT = 10000;
-const PING_INTERVAL = 5000;
+const PING_INTERVAL = 10000;
 
 const STR_NO_LOBBY = "Have not joined lobby yet";
 const STR_HOST_DISCONNECTED = "Room host has disconnected";
@@ -76,7 +76,7 @@ function randomSecret () {
 	return out;
 }
 
-const wss = new WebSocket.Server({ port: PORT });
+const ws_server = new WebSocket.Server({ port: PORT });
 
 class ProtoError extends Error {
 	constructor (code, message) {
@@ -261,7 +261,7 @@ function parseMsg (peer, msg) {
 	throw new ProtoError(4000, STR_INVALID_CMD);
 }
 
-wss.on("connection", (ws, request, client) => {
+ws_server.on("connection", (ws, request, client) => {
 	if (peersCount >= MAX_PEERS) {
 		ws.close(4000, STR_TOO_MANY_PEERS);
 		return;
@@ -316,7 +316,7 @@ const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 		console.log(`Node js waiting for peers to connect on Port ${PORT}...`);
 	}
 
-	wss.clients.forEach( (ws) => {
+	ws_server.clients.forEach( (ws) => {
 		ws.ping();
 	} );
 	if (peersCount > 0) {
