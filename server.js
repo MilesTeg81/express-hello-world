@@ -153,8 +153,8 @@ class Lobby {
 		peer.ws.send(`I: ${assigned}\n`);
 		console.log(`I:PeerId: ${assigned}\n`);
 		this.peers.forEach((p) => {
-			p.ws.send(`N: ${assigned}\n`); // send id of the new one to old peers
-			peer.ws.send(`N: ${this.getPeerId(p)}\n`); // send id of all old peers to new one
+			p.ws.send(`N: ${assigned}\n`); // send id of the new peer to old peers
+			peer.ws.send(`N: ${this.getPeerId(p)}\n`); // send id of all old peers to new peer
 			console.log(`to old peers: N: ${assigned};  to new peer: N: ${this.getPeerId(p)}`); 
 		});
 		this.peers.push(peer);
