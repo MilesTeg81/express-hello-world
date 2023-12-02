@@ -2,10 +2,20 @@
 
 /*
  * Using Render.com FREE tier:
- *  Sockets will selfterminate connections after 5 min!
- *  This shouldn't be an issue for this script
- *  Bc it's only used for testing simple lobbies & matchmaking.
- *  I'm not so sure about HTML5-ports though...
+ *
+ * Render.com specific settings for this example (server.js):
+ * - server does NOT accept connections using port numbers!
+ *   (Godot Clients just supply your url (e.g. "wss:\\exampleproject.render.com" )
+ * - HTML5-exports REQUIRE SSL ("wss:\\" instead of "ws:\\")
+ *    and therefor a domainname, NO IP-adress!
+ *
+ * - Render.com will "spin" down your webservice/server.js if there are no incoming connections!
+ *    (usually after 15-20 min.)
+ * - it's enough to try "join" or "host" within your godot-game and wait ~30 sec to let it spin up again.
+ * - websocket-connections might get closed after 5 min.
+ *    This shouldn't be an issue for this script
+ *
+ *    for testing this shouldn't be a big issue.
 */
 
 // < from render.com express helloworld */
