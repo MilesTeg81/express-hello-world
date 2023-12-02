@@ -114,13 +114,7 @@ function randomSecret () {
 	return out;
 }
 
-const ws_server = new WebSocket(process.env.masterURL, {
-  headers: {
-    "User-Agent": `WebSocket Client`
-  }
-});
-//changed for glitch.me
-//const ws_server = new WebSocket.Server({ port: PORT });
+const ws_server = new WebSocket.Server({ port: PORT });
 
 class ProtoError extends Error {
 	constructor (code, message) {
