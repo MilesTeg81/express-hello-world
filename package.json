@@ -8,9 +8,7 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "start": "node server.js",
     "test": "eslint server.js && echo \"Lint OK\" && exit 0",
-    "starthello": "node app.js"
   },
   "scriptsComments": {
     "info": "just testing",
@@ -18,6 +16,7 @@
     "express": "^4.18.2",
     "start": "node server.js",
     "engines: node": ">=18.18.0"
+    "starthello": "node app.js"
   },
   "dependencies": {
     "ws": "^7.0.0"
