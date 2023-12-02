@@ -190,11 +190,11 @@ function joinLobby (peer, pLobby) {
 *	}
 	*/
 	const lobby = lobbies.get(lobbyName);
-	
+	/*
 	var obj = Object.fromEntries(lobbies);
     var jsonString = JSON.stringify(obj);
 	console.log(`All Lobbies: ${jsonString} `);
-	
+	*/
 	if (!lobby) throw new ProtoError(4000, (lobbyName+STR_LOBBY_DOES_NOT_EXISTS));
 	if (lobby.sealed) throw new ProtoError(4000, STR_LOBBY_IS_SEALED);
 	peer.lobby = lobbyName;
