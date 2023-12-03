@@ -113,13 +113,12 @@ function randomId () {
 
 
 function randomSecret0 () {
-	let start = unixTimestamp();
+	let start = now();
 	let out = "";
 	for (let i = 0; i < 5; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
-	let gentime = unixTimestamp() - start;
-	gentime = gentime.toString;
+	let gentime = now() - start;
 	console.log(`randomSecret0: ${gentime} ms to generate secret.`);
 	//return out;
 }
@@ -127,10 +126,9 @@ function randomSecret0 () {
 
 
 function randomSecret () {
-	let start = unixTimestamp();
+	let start = now();
 	let out = crypto.randomUUID().replace(/-/gi, '');
-	let gentime = unixTimestamp() - start;
-	gentime = gentime.toString;
+	let gentime = now() - start;
 	console.log(`randomSecret: ${gentime} ms to generate secret.`);
 	return out;
 }
