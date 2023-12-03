@@ -79,7 +79,7 @@ const PORT = process.env.PORT || 10000; // eslint-disable-line no-undef no-proce
 
 const ALFNUM = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-const NO_LOBBY_TIMEOUT = 1000;
+const NO_LOBBY_TIMEOUT = 3000;
 const SEAL_CLOSE_TIMEOUT = 10000;
 const PING_INTERVAL = 10000;
 
