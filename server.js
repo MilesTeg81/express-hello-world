@@ -119,7 +119,7 @@ function randomSecret0 () {
 	for (let i = 0; i < 5; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
-	let gentime = start - performance.now();
+	let gentime = performance.now() - start;
 	console.log(`randomSecret0: ${gentime} ms to generate secret.`);
 	//return out;
 }
@@ -129,7 +129,7 @@ function randomSecret0 () {
 function randomSecret () {
 	let start = performance.now();
 	let out = crypto.randomUUID().replace(/-/gi, '');
-	let gentime = start - performance.now();
+	let gentime = performance.now() - start;
 	console.log(`randomSecret: ${gentime} ms to generate secret.`);
 	return out;
 }
@@ -234,6 +234,8 @@ function joinLobby (peer, pLobby) {
 			throw new ProtoError(4000, STR_ALREADY_IN_LOBBY);
 		}
 		//lobbyName = "12345"		//
+		test  = randomSecret0();
+		lobbyName = randomSecret();
 		test  = randomSecret0();
 		lobbyName = randomSecret();
 		lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
