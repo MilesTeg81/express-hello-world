@@ -98,10 +98,11 @@ const STR_INVALID_CMD = "Invalid command";
 const STR_TOO_MANY_PEERS = "Too many peers connected";
 const STR_INVALID_TRANSFER_MODE = "Invalid transfer mode, must be text";
 
+/*
 function randomInt (low, high) {
 	return Math.floor(Math.random() * (high - low + 1) + low);
 }
-
+*/
 function randomId () {
 	return Math.abs(new Int32Array(crypto.randomBytes(4).buffer)[0]);
 }
