@@ -45,8 +45,9 @@
 const WebSocket = require("ws");
 const crypto = require("crypto");
 
-const MAX_PEERS = 256;
+const MAX_PEERS = 265;
 const MAX_LOBBIES = 64;
+const MAX_LOBBYPEERS = 8
 const PORT = process.env.PORT || 10000; // eslint-disable-line no-undef no-process-env
 
 
@@ -100,29 +101,36 @@ const STR_TOO_MANY_PEERS = "Too many peers connected";
 const STR_INVALID_TRANSFER_MODE = "Invalid transfer mode, must be text";
 
 
-/*
+
 function randomInt (low, high) {
 	return Math.floor(Math.random() * (high - low + 1) + low);
 }
-*/
+
 
 function randomId () {
 	return Math.abs(new Int32Array(crypto.randomBytes(4).buffer)[0]);
 }
 
-/*
-function randomSecret () {
+
+function randomSecret0 () {
+	let start = unixTimestamp();
 	let out = "";
 	for (let i = 0; i < 5; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
-	return out;
-}*/
+	let gentime = unixTimestamp() - start;
+	console.log("randomSecret0: ${gentime} ms to generate secret.");
+	//return out;
+}
 
 
 
 function randomSecret () {
-	return randomUUID().replace(/-/gi, '');
+	let start = unixTimestamp();
+	let out = randomUUID().replace(/-/gi, '');
+	let gentime = unixTimestamp() - start;
+	console.log("randomSecret: ${gentime} ms to generate secret.");
+	return out;
 }
 
 const ws_server = new WebSocket.Server({ port: PORT });
@@ -214,6 +222,7 @@ let peersCount = 0;
 
 function joinLobby (peer, pLobby) {
 	let lobbyName = pLobby;
+	let test = pLobby;
 	console.log(`pLobby: ${pLobby}`);
 	if (lobbyName === "") {
 		if (lobbies.size >= MAX_LOBBIES) {
@@ -223,7 +232,9 @@ function joinLobby (peer, pLobby) {
 		if (peer.lobby !== "") {
 			throw new ProtoError(4000, STR_ALREADY_IN_LOBBY);
 		}
-		lobbyName = "12345"		//randomSecret();
+		//lobbyName = "12345"		//
+		test  = randomSecret0();
+		lobbyName = randomSecret();
 		lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
 		console.log(`Peer ("Host") ${peer.id} created lobby ${lobbyName}`);
 		console.log(`Open lobbies: ${lobbies.size}`);
@@ -270,7 +281,8 @@ function parseMsg (peer, msg) {
 	// Lobby joining.
 	if (cmd.startsWith("J: ")) {
 		console.log(cmd);		
-		joinLobby(peer, cmd.substr(3).trim());
+		//joinLobby(peer, cmd.substr(3).trim());
+		joinLobby(peer, cmd.substring(3).trim());
 		return;
 	}
 
@@ -371,3 +383,7 @@ const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	intervalCount++;
 	
 }, PING_INTERVAL);
+
+function unixTimestamp () {  
+  return Math.floor(Date.now() / 1000)
+}
