@@ -117,7 +117,7 @@ async function randomSecret0 () {
 	await new Promise(resolve => setTimeout(resolve, 5000));
 	let start = performance.now();
 	let out = "";
-	for (let i = 0; i < 5; i++) {
+	for (let i = 0; i < 16; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
 	let gentime = performance.now() - start;
