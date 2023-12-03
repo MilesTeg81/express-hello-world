@@ -9,3 +9,4 @@ package-lock.json
 *.lock
 yarn.lock
 *.lnk
+yarn.lock

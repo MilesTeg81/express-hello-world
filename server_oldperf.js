@@ -1,7 +1,7 @@
 // GENERAL WARNING:
 
 /*
- * Using Render.com FREE tier:  freebox?
+ * Using Render.com FREE tier:
  *
  * Render.com specific settings for this example (server.js):
  * - server does NOT accept connections using port numbers!
@@ -41,9 +41,7 @@
  * server.headersTimeout = 120 * 1000; */
 
 //   from render.com express helloworld  >
-
-// const {performance} = require('perf_hooks');
-// let start = performance.now();
+const {performance} = require('perf_hooks');
 
 const WebSocket = require("ws");
 const crypto = require("crypto");
@@ -51,7 +49,7 @@ const crypto = require("crypto");
 const MAX_PEERS = 265;
 const MAX_LOBBIES = 64;
 const MAX_LOBBYPEERS = 8
-const PORT = process.env.PORT || 10000; //9080; // eslint-disable-line no-undef no-process-env
+const PORT = process.env.PORT || 10000; // eslint-disable-line no-undef no-process-env
 
 
 /* infos about port settings
@@ -103,6 +101,8 @@ const STR_INVALID_CMD = "Invalid command";
 const STR_TOO_MANY_PEERS = "Too many peers connected";
 const STR_INVALID_TRANSFER_MODE = "Invalid transfer mode, must be text";
 
+
+
 function randomInt (low, high) {
 	return Math.floor(Math.random() * (high - low + 1) + low);
 }
@@ -112,12 +112,35 @@ function randomId () {
 	return Math.abs(new Int32Array(crypto.randomBytes(4).buffer)[0]);
 }
 
-function randomSecret () {
+
+async function randomSecret0 () {
+	await new Promise(resolve => setTimeout(resolve, 5000));
+	let start = performance.now();
 	let out = "";
 	for (let i = 0; i < 16; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
-	//console.log(`randomSecret: ${gentime} ms to generate secret.`);
+	let gentime = performance.now() - start;
+	await new Promise(resolve => setTimeout(resolve, 5000));
+	console.log(`randomSecret0: ${gentime} ms to generate secret.`);
+	//return out;
+	
+}
+
+
+function sleep(ms) {
+  return new Promise((resolve) => {
+    setTimeout(resolve, ms);
+  });
+}
+
+async function randomSecret () {
+	await new Promise(resolve => setTimeout(resolve, 5000));
+	let start = performance.now();
+	let out = crypto.randomUUID().replace(/-/gi, '');
+	let gentime = performance.now() - start;
+	await new Promise(resolve => setTimeout(resolve, 5000));
+	console.log(`randomSecret: ${gentime} ms to generate secret.`);
 	return out;
 }
 
@@ -210,7 +233,7 @@ let peersCount = 0;
 
 function joinLobby (peer, pLobby) {
 	let lobbyName = pLobby;
-	let start_time = process.uptime();
+	let test = pLobby;
 	console.log(`pLobby: ${pLobby}`);
 	if (lobbyName === "") {
 		if (lobbies.size >= MAX_LOBBIES) {
@@ -221,8 +244,14 @@ function joinLobby (peer, pLobby) {
 			throw new ProtoError(4000, STR_ALREADY_IN_LOBBY);
 		}
 		//lobbyName = "12345"		//
+		test  = randomSecret0();
 		lobbyName = randomSecret();
-		// await new Promise(resolve => setTimeout(resolve, 1000));
+		test  = randomSecret0();
+		lobbyName = randomSecret();
+		test  = randomSecret0();
+		lobbyName = randomSecret();
+		test  = randomSecret0();
+		lobbyName = randomSecret();
 		lobbies.set(lobbyName, new Lobby(lobbyName, peer.id));
 		console.log(`Peer ("Host") ${peer.id} created lobby ${lobbyName}`);
 		console.log(`Open lobbies: ${lobbies.size}`);
@@ -254,13 +283,10 @@ function joinLobby (peer, pLobby) {
 		console.log(`member ${member.id}  is in lobby ${lobbyName}\n`);
 	});
 	peer.ws.send(`J: ${lobbyName}\n`);
-	let end_time = process.uptime();
-	console.log("start to end for joinlobby:",end_time - start_time );
 	
 }
 
 function parseMsg (peer, msg) {
-	let start_time = process.uptime();
 	const sep = msg.indexOf("\n");
 	if (sep < 0) throw new ProtoError(4000, STR_INVALID_FORMAT);
 
@@ -311,12 +337,9 @@ function parseMsg (peer, msg) {
 		return;
 	}
 	throw new ProtoError(4000, STR_INVALID_CMD);
-	let end_time = process.uptime();
-	console.log("start to end for parseMsg:",end_time - start_time );
 }
 
 ws_server.on("connection", (ws, request, client) => {
-	let start_time = process.uptime();
 	if (peersCount >= MAX_PEERS) {
 		ws.close(4000, STR_TOO_MANY_PEERS);
 		return;
@@ -359,8 +382,6 @@ ws_server.on("connection", (ws, request, client) => {
 	ws.on("error", (error) => {
 		console.error(error);
 	});
-	let end_time = process.uptime();
-	console.log("start to end for wsconnection:",end_time - start_time );
 });
 
 let intervalCount = 0;
@@ -374,8 +395,12 @@ const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 		ws.ping();
 	} );
 	if (peersCount > 0) {
-	console.log(`${intervalCount}   Listening on Port ${PORT}${tmpstring}, Pinging ${peersCount} peers.`);
+	console.log(`${intervalCount}   Listening on Port ${PORT}${tmpstring}, Pinged ${peersCount} peers.`);
 	}
 	intervalCount++;
 	
 }, PING_INTERVAL);
+
+function unixTimestamp () {  
+  return Math.floor(Date.now() / 1000)
+}
