@@ -103,24 +103,22 @@ function randomInt (low, high) {
 }
 
 function randomId () {
-	//return Math.abs(new Int32Array(crypto.randomBytes(4).buffer)[0]);
-	return Math.abs( parseInt((crypto.randomBytes(4).toString('hex')),16) );
-	
+	return Math.abs(new Int32Array(crypto.randomBytes(4).buffer)[0]);
 }
 
 /*
-parseInt((crypto.randomBytes(4).toString('hex')),16)
-, function(ex, buf) {
-  var hex = buf.toString('hex');
-  var myInt32 = parseInt(hex, 16);
-});
-*/
 function randomSecret () {
 	let out = "";
 	for (let i = 0; i < 5; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
 	return out;
+}*/
+
+
+
+function randomSecret () {
+	return randomUUID().replace(/-/gi, '');
 }
 
 const ws_server = new WebSocket.Server({ port: PORT });
