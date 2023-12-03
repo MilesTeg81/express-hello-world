@@ -49,6 +49,7 @@ const MAX_PEERS = 256;
 const MAX_LOBBIES = 64;
 const PORT = process.env.PORT || 10000; // eslint-disable-line no-undef no-process-env
 
+
 /* infos about port settings
 *
 *  Unix [1]:
@@ -98,11 +99,13 @@ const STR_INVALID_CMD = "Invalid command";
 const STR_TOO_MANY_PEERS = "Too many peers connected";
 const STR_INVALID_TRANSFER_MODE = "Invalid transfer mode, must be text";
 
+
 /*
 function randomInt (low, high) {
 	return Math.floor(Math.random() * (high - low + 1) + low);
 }
 */
+
 function randomId () {
 	return Math.abs(new Int32Array(crypto.randomBytes(4).buffer)[0]);
 }
@@ -353,24 +356,18 @@ ws_server.on("connection", (ws, request, client) => {
 });
 
 let intervalCount = 0;
-let intervalAlone = 0;
 
 const interval = setInterval(() => { // eslint-disable-line no-unused-vars
 	let tmpstring = "";
-	intervalCount++;
-	if (intervalCount == 1) {
+	if (intervalCount == 0 ) {
 		console.log(`Node js waiting for peers to connect on Port ${PORT}...`);
 	}
-
 	ws_server.clients.forEach( (ws) => {
 		ws.ping();
 	} );
 	if (peersCount > 0) {
-		intervalAlone = 0;
-		tmpstring = `, pinging ${peersCount} peers.`;
-	} else {
-		intervalAlone++;
-		tmpstring = `, no peers found.`;
+	console.log(`${intervalCount}   Listening on Port ${PORT}${tmpstring}, Pinged ${peersCount} peers.`);
 	}
-	console.log(`${intervalCount}   Listening on Port ${PORT}${tmpstring}`);
+	intervalCount++;
+	
 }, PING_INTERVAL);
