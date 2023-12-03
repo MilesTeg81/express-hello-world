@@ -118,7 +118,7 @@ function randomSecret0 () {
 	for (let i = 0; i < 5; i++) {
 		out += ALFNUM[randomInt(0, ALFNUM.length - 1)];
 	}
-	let gentime = performance.now() - start;
+	let gentime = start - performance.now();
 	console.log(`randomSecret0: ${gentime} ms to generate secret.`);
 	//return out;
 }
@@ -128,7 +128,7 @@ function randomSecret0 () {
 function randomSecret () {
 	let start = performance.now();
 	let out = crypto.randomUUID().replace(/-/gi, '');
-	let gentime = performance.now() - start;
+	let gentime = start - performance.now();
 	console.log(`randomSecret: ${gentime} ms to generate secret.`);
 	return out;
 }
