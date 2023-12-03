@@ -120,7 +120,7 @@ function randomSecret0 () {
 	}
 	let gentime = unixTimestamp() - start;
 	gentime = gentime.toString;
-	console.log("randomSecret0: ${gentime} ms to generate secret.");
+	console.log(`randomSecret0: ${gentime} ms to generate secret.`);
 	//return out;
 }
 
@@ -131,7 +131,7 @@ function randomSecret () {
 	let out = crypto.randomUUID().replace(/-/gi, '');
 	let gentime = unixTimestamp() - start;
 	gentime = gentime.toString;
-	console.log("randomSecret: ${gentime} ms to generate secret.");
+	console.log(`randomSecret: ${gentime} ms to generate secret.`);
 	return out;
 }
 
