@@ -4,7 +4,7 @@
   "description": "Express Hello World on Render",
   "main": "server.js",
   "repository": "https://github.com/render-examples/express-hello-world",
-  "author": "Fabio Alessandrelli",
+  "author": "MilesTeg",
   "license": "MIT",
   "private": false,
   "scripts": {
@@ -15,8 +15,11 @@
     "info": "just testing",
     "teststart": "eslint server.js && echo \"Lint OK\" && node server.js",
     "express": "^4.18.2",
-    "engines: node": ">=18.18.0",
+    "---engines--- node": ">=18.18.0",
     "starthello": "node app.js"
+  },
+  "engines": {
+    "node": ">=18.18.0"
   },
   "dependencies": {
     "ws": "^7.0.0"
